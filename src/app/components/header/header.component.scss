@@ -1,0 +1,21 @@
+.header {
+    background: linear-gradient(270deg, rgb(0, 90, 255) 0%, rgb(0, 23, 68) 100%);
+    .logo {
+        color: #ffffff;
+        font-weight: 600;
+    }
+    .navbar-nav {
+        .nav-item {
+            padding: 0 .5rem;
+        }
+    }
+    .nav-link {
+        color: rgba($color: #ffffff, $alpha: .85);
+    }
+    .nav-link:hover {
+        color: rgba($color: #ff961e, $alpha: 1.0);
+    }
+    .active {
+        color: rgba($color: #ffffff, $alpha: 1.0);
+    }
+}
