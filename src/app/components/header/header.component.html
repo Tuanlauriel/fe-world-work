@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header pb-2 pb-lg-0">
     <nav class="navbar navbar-expand-lg mb-lg-3">
         <div class="container-fluid px-lg-4">
             <a routerLink="/home" class="navbar-brand logo">
@@ -10,11 +10,28 @@
                     <li class="nav-item"><a routerLink="/jobs" class="nav-link" routerLinkActive="active">Jobs</a></li>
                     <li class="nav-item"><a routerLink="/companies" class="nav-link" routerLinkActive="active">Companies</a></li>
                     <li class="nav-item"><a routerLink="/my-job" class="nav-link" routerLinkActive="active">My jobs</a></li>
+                    @if (user?.role === 'ADMIN') {
+                        <li class="nav-item"><a routerLink="/admin" class="nav-link" routerLinkActive="active">Admin</a></li>
+                    }
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item"><a routerLink="/for-employers" class="nav-link" style="font-weight: 600;" routerLinkActive="active">FOR EMPLOYERS</a></li>
-                    <li class="nav-item"><a routerLink="/login" class="btn btn-outline-light">Login</a></li>
-                    <li class="nav-item"><a routerLink="/register" class="btn btn-light">Register</a></li>
+                    @if (!isLogged) {
+                        <li class="nav-item"><a routerLink="/login" class="btn btn-outline-light">Login</a></li>
+                        <li class="nav-item"><a routerLink="/login" class="btn btn-light">Register</a></li>
+                    } @else {
+                        <div class="dropdown dropdown-start">
+                            <a class="btn-profile dropdown-toggle" routerLink="/profile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://www.svgrepo.com/show/382109/male-avatar-boy-face-man-user-7.svg" alt="" width="30">
+                                <span>{{ user?.firstName }}</span>
+                            </a>
+                          
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+                              <li><button class="dropdown-item" (click)="logout()">Logout</button></li>
+                            </ul>
+                          </div>
+                    }
                 </ul>
             </div>
         </div>

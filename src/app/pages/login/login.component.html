@@ -1,36 +1,75 @@
-<section>
+<section class="d-flex justify-content-center align-items-center mt-3">
     <div class="container" id="container" [ngClass]="{'active': isHidden}">
         <div class="form-container sign-up">
-            <form>
+            <form [formGroup]="registerForm" (submit)="registerSubmit()">
                 <h1>Create Account</h1>
-                <div class="social-icons">
-                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                <div class="mt-2">
+                    @if (messageError) {
+                    <div class="alert p-2" [ngClass]="successNoti ? 'alert-success' : 'alert-danger'">{{ messageError }}</div>
+                    }
+                    <input type="text" formControlName="firstName" placeholder="First name">
+                    @if (firstNameRegister?.touched && firstNameRegister?.errors?.['required']) {
+                    <div class="form-text text-danger">First name is required.</div>
+                    }
+                    <input type="text" formControlName="lastName" placeholder="Last name">
+                    @if (lastNameRegister?.touched && lastNameRegister?.errors?.['required']) {
+                    <div class="form-text text-danger">Last name is required.</div>
+                    }
+                    <input type="email" formControlName="email" placeholder="Email">
+                    @if (emailRegister?.touched) {
+                    @if (emailRegister?.errors?.['required']) {
+                    <div class="form-text text-danger">Email is required.</div>
+                    }
+                    @if (emailRegister?.errors?.['email']) {
+                    <div class="form-text text-danger">Invalid Email address.</div>
+                    }
+                    }
+                    <input type="password" formControlName="password" placeholder="Password" class="mb-3">
+                    @if (passwordRegister?.touched) {
+                    @if (passwordRegister?.errors?.['required']) {
+                    <div class="form-text text-danger">Password is required.</div>
+                    }
+                    @if (passwordRegister?.errors?.['minlength']) {
+                    <div class="form-text text-danger">Password must be at least 6 characters long.</div>
+                    }
+                    }
+                    <select class="form-select p-1 mb-3" aria-label="Select role" formControlName="role">
+                        <option selected>Role</option>
+                        <option value="USER" selected>User</option>
+                        <option value="EMPLOYERS" value="EMPLOYERS">For employers</option>
+                    </select>
+                    <button type="submit">Sign Up</button>
                 </div>
-                <span>or use your email for registeration</span>
-                <input type="text" placeholder="Name">
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <input type="password" placeholder="Password">
-                <button>Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in">
-            <form>
+            <form [formGroup]="loginForm" (submit)="loginSubmit()">
                 <h1>Sign In</h1>
-                <div class="social-icons">
-                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                <div class="mt-2">
+                    @if (loginError) {
+                    <div class="alert alert-danger p-2">{{ loginError }}</div>
+                    }
+                    <input type="email" formControlName="email" placeholder="Email">
+                    @if (emailLogin?.touched) {
+                    @if (emailLogin?.errors?.['required']) {
+                    <div class="form-text text-danger">Email is required.</div>
+                    }
+                    @if (emailLogin?.errors?.['email']) {
+                    <div class="form-text text-danger">Invalid Email address.</div>
+                    }
+                    }
+                    <input type="password" formControlName="password" placeholder="Password">
+                    @if (passwordLogin?.touched) {
+                    @if (passwordLogin?.errors?.['required']) {
+                    <div class="form-text text-danger">Password is required.</div>
+                    }
+                    @if (passwordLogin?.errors?.['minlength']) {
+                    <div class="form-text text-danger">Password must be at least 6 characters long.</div>
+                    }
+                    }
+                    <a>Forget Your Password?</a>
                 </div>
-                <span>or use your email password</span>
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <a href="#">Forget Your Password?</a>
-                <button>Sign In</button>
+                <button type="submit">Sign In</button>
             </form>
         </div>
         <div class="toggle-container">
@@ -38,12 +77,12 @@
                 <div class="toggle-panel toggle-left">
                     <h1>Hello, Friend!</h1>
                     <p>Register with your personal details to use all of site features or</p>
-                    <button class="hidden" (click)="noHidden()" id="login">Sign In</button>
+                    <button class="hidden" (click)="displayAction()" id="login">Sign In</button>
                 </div>
                 <div class="toggle-panel toggle-right">
                     <h1>Welcome Back!</h1>
                     <p>Enter your personal details to use all of site features or</p>
-                    <button class="hidden" (click)="hidden()" id="register">Sign Up</button>
+                    <button class="hidden" (click)="displayAction()" id="register">Sign Up</button>
                 </div>
             </div>
         </div>
