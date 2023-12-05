@@ -36,7 +36,6 @@ export class HeaderComponent {
         this.userService.getUserByEmail(email).subscribe(data => this.user = data);
       }
     }
-    console.log(this.user?.role);
   }
 
   logout(): void {

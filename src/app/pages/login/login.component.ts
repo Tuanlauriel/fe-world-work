@@ -25,6 +25,7 @@ export class LoginComponent {
   isHidden: boolean = false;
   messageError?: string;
   loginError?: string;
+  successNoti?: boolean;
 
   displayAction(): void {
     this.isHidden = !this.isHidden;
@@ -47,7 +48,8 @@ export class LoginComponent {
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    role: new FormControl('Role', [Validators.required])
   });
 
   get firstNameRegister() {
@@ -64,6 +66,10 @@ export class LoginComponent {
 
   get passwordRegister() {
     return this.registerForm.get('password');
+  }
+
+  get roleRegister() {
+    return this.registerForm.get('role');
   }
 
   loginSubmit(): void {
@@ -91,9 +97,14 @@ export class LoginComponent {
     this.messageError = undefined;
     if (this.registerForm.valid) {
       const userCreate: UserCreate = this.registerForm.value as UserCreate;
+      if (userCreate.role === 'Role') {
+        userCreate.role = 'USER';
+      }
+      console.log(userCreate);
       this.userService.createUser(userCreate).subscribe({
         next: (response) => {
           console.log(response);
+          this.successNoti = true;
           this.messageError = 'Created account successfully';
         },
         error: (error) => {

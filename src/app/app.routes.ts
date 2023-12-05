@@ -16,6 +16,8 @@ import { MyJobComponent } from './pages/my-job/my-job.component';
 import { employersGuardGuard } from './auth-guard/employers-guard.guard';
 import { CompaniesComponent } from './pages/companies/companies.component';
 import { JobsComponent } from './pages/jobs/jobs.component';
+import { EmployerSignupComponent } from './pages/employer-signup/employer-signup.component';
+import { CompanyCreateComponent } from './pages/company-create/company-create.component';
 
 export const routes: Routes = [
     {
@@ -27,14 +29,16 @@ export const routes: Routes = [
             { path: 'jobs', component: JobsComponent },
             { path: 'profile', component: ProfileComponent, canActivate: [authGuardGuard] },
             { path: 'my-job', component: MyJobComponent, canActivate: [authGuardGuard] },
+            { path: 'employer-signup', component: EmployerSignupComponent },
+            { path: 'company-create', component: CompanyCreateComponent },
             { path: '', redirectTo: 'home', pathMatch: 'full' }
         ]
 
     },
     {
-        path: 'for-employers', component: EmployersLayoutComponent, canActivate: [employersGuardGuard], children: [
-            { path: 'dashboard', component: DashboardEmployersComponent },
-            { path: 'company', component: CompanyManagerComponent },
+        path: 'for-employers', component: EmployersLayoutComponent, canActivate: [authGuardGuard], children: [
+            { path: 'dashboard', component: DashboardEmployersComponent, canActivate: [employersGuardGuard] },
+            { path: 'company', component: CompanyManagerComponent , canActivate: [employersGuardGuard] },
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
         ]
     },

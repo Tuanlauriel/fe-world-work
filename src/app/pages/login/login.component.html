@@ -5,7 +5,7 @@
                 <h1>Create Account</h1>
                 <div class="mt-2">
                     @if (messageError) {
-                    <div class="alert alert-danger p-2">{{ messageError }}</div>
+                    <div class="alert p-2" [ngClass]="successNoti ? 'alert-success' : 'alert-danger'">{{ messageError }}</div>
                     }
                     <input type="text" formControlName="firstName" placeholder="First name">
                     @if (firstNameRegister?.touched && firstNameRegister?.errors?.['required']) {
@@ -24,7 +24,7 @@
                     <div class="form-text text-danger">Invalid Email address.</div>
                     }
                     }
-                    <input type="password" formControlName="password" placeholder="Password">
+                    <input type="password" formControlName="password" placeholder="Password" class="mb-3">
                     @if (passwordRegister?.touched) {
                     @if (passwordRegister?.errors?.['required']) {
                     <div class="form-text text-danger">Password is required.</div>
@@ -33,6 +33,11 @@
                     <div class="form-text text-danger">Password must be at least 6 characters long.</div>
                     }
                     }
+                    <select class="form-select p-1 mb-3" aria-label="Select role" formControlName="role">
+                        <option selected>Role</option>
+                        <option value="USER" selected>User</option>
+                        <option value="EMPLOYERS" value="EMPLOYERS">For employers</option>
+                    </select>
                     <button type="submit">Sign Up</button>
                 </div>
             </form>
@@ -42,8 +47,8 @@
                 <h1>Sign In</h1>
                 <div class="mt-2">
                     @if (loginError) {
-                        <div class="alert alert-danger p-2">{{ loginError }}</div>
-                        }
+                    <div class="alert alert-danger p-2">{{ loginError }}</div>
+                    }
                     <input type="email" formControlName="email" placeholder="Email">
                     @if (emailLogin?.touched) {
                     @if (emailLogin?.errors?.['required']) {
