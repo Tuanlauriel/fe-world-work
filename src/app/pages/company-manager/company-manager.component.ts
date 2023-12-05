@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './company-manager.component.scss'
 })
 export class CompanyManagerComponent {
-
+  name = 'Company Manager';
 }
