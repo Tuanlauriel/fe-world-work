@@ -38,7 +38,7 @@ export const routes: Routes = [
     {
         path: 'for-employers', component: EmployersLayoutComponent, canActivate: [authGuardGuard], children: [
             { path: 'dashboard', component: DashboardEmployersComponent, canActivate: [employersGuardGuard] },
-            { path: 'company', component: CompanyManagerComponent , canActivate: [employersGuardGuard] },
+            { path: 'company', component:  CompanyCreateComponent, canActivate: [employersGuardGuard] },
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
         ]
     },
