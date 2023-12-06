@@ -20,6 +20,8 @@ import { EmployerSignupComponent } from './pages/employer-signup/employer-signup
 import { CompanyCreateComponent } from './pages/company-create/company-create.component';
 import { JobListEmployerComponent } from './pages/job-list-employer/job-list-employer.component';
 import { JobCreateComponent } from './pages/job-create/job-create.component';
+import { CompanyDetailsComponent } from './pages/company-details/company-details.component';
+import { JobDetailsComponent } from './pages/job-details/job-details.component';
 
 export const routes: Routes = [
     {
@@ -28,7 +30,9 @@ export const routes: Routes = [
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },
             { path: 'companies', component: CompaniesComponent },
+            { path: 'companies/:id', component: CompanyDetailsComponent },
             { path: 'jobs', component: JobsComponent },
+            { path: 'jobs/:id', component: JobDetailsComponent },
             { path: 'profile', component: ProfileComponent, canActivate: [authGuardGuard] },
             { path: 'my-job', component: MyJobComponent, canActivate: [authGuardGuard] },
             { path: 'employer-signup', component: EmployerSignupComponent },
