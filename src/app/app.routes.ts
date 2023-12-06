@@ -18,6 +18,8 @@ import { CompaniesComponent } from './pages/companies/companies.component';
 import { JobsComponent } from './pages/jobs/jobs.component';
 import { EmployerSignupComponent } from './pages/employer-signup/employer-signup.component';
 import { CompanyCreateComponent } from './pages/company-create/company-create.component';
+import { JobListEmployerComponent } from './pages/job-list-employer/job-list-employer.component';
+import { JobCreateComponent } from './pages/job-create/job-create.component';
 
 export const routes: Routes = [
     {
@@ -39,6 +41,8 @@ export const routes: Routes = [
         path: 'for-employers', component: EmployersLayoutComponent, canActivate: [authGuardGuard], children: [
             { path: 'dashboard', component: DashboardEmployersComponent, canActivate: [employersGuardGuard] },
             { path: 'company', component:  CompanyCreateComponent, canActivate: [employersGuardGuard] },
+            { path: 'job-list', component:  JobListEmployerComponent, canActivate: [employersGuardGuard] },
+            { path: 'job-create', component:  JobCreateComponent, canActivate: [employersGuardGuard] },
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
         ]
     },
